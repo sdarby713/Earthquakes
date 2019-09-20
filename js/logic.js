@@ -9,7 +9,7 @@ function getColor(d)  {
                   "#800000";
 }
 
-function createMap(eqData0, eqData2, eqData4, eqData6)   {
+function createMap(eqData0, eqData1, eqData2, eqData3, eqData4, eqData5, eqData6)   {
 
   // Create the tile layer that will be the background of our map
   var lightmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
@@ -31,9 +31,12 @@ function createMap(eqData0, eqData2, eqData4, eqData6)   {
 
   // Create an overlayMaps object to hold the earthquakes layer
   var overlayMaps = { 
-    "Magnitude 0-2": eqData0,
-    "Magnitude 2-4": eqData2,
-    "Magnitude 4-6": eqData4,
+    "Magnitude 0-1": eqData0,
+    "Magnitude 1-2": eqData1,
+    "Magnitude 2-3": eqData2,
+    "Magnitude 3-4": eqData3,
+    "Magnitude 4-5": eqData4,
+    "Magnitude 5-6": eqData5,
     "Magnitude 6-up": eqData6
   };
 
@@ -41,12 +44,12 @@ function createMap(eqData0, eqData2, eqData4, eqData6)   {
   var myMap = L.map("map-id", {
     center: [40, -109],
     zoom: 5,
-    layers: [lightmap, eqData0, eqData2, eqData4, eqData6]
+    layers: [lightmap, eqData0, eqData1, eqData2, eqData3, eqData4, eqData5, eqData6]
   });
 
   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
   L.control.layers(baseMaps, overlayMaps, {
-  //  collapsed: true
+      collapsed: false
   }).addTo(myMap);
 
   // create a legend
@@ -84,8 +87,11 @@ function createMarkers(feats) {
   console.log(feats);
   // Initialize an array to hold earthquake markers
   var eqMarkers0 = [];
+  var eqMarkers1 = [];
   var eqMarkers2 = [];
+  var eqMarkers3 = [];
   var eqMarkers4 = [];
+  var eqMarkers5 = [];
   var eqMarkers6 = [];
   var markerRadius = 500;
   var magnitude = 0;
@@ -119,14 +125,23 @@ function createMarkers(feats) {
  
         // Add the marker to the eqMarkers array
     
-    if (magnitude < 2) {
+    if (magnitude < 1) {
       eqMarkers0.push(marker);
       }
-    else if (magnitude < 4) {
+    else if (magnitude < 2) {
+      eqMarkers1.push(marker);
+      }
+    else if (magnitude < 3) {
       eqMarkers2.push(marker);
       }
-    else if (magnitude < 6) {
+    else if (magnitude < 4) {
+      eqMarkers3.push(marker);
+      }
+    else if (magnitude < 5) {
       eqMarkers4.push(marker);
+      }
+    else if (magnitude < 6) {
+      eqMarkers5.push(marker);
       }
     else  {
       eqMarkers6.push(marker);
@@ -155,10 +170,13 @@ function createMarkers(feats) {
 // Create a layer group made from the eqMarkers array, pass it into the createMap function
 
   var eqLayer0 = L.layerGroup(eqMarkers0);
+  var eqLayer1 = L.layerGroup(eqMarkers1);
   var eqLayer2 = L.layerGroup(eqMarkers2);
+  var eqLayer3 = L.layerGroup(eqMarkers3);
   var eqLayer4 = L.layerGroup(eqMarkers4);
+  var eqLayer5 = L.layerGroup(eqMarkers5);
   var eqLayer6 = L.layerGroup(eqMarkers6);
-  createMap(eqLayer0, eqLayer2, eqLayer4, eqLayer6);
+  createMap(eqLayer0, eqLayer1, eqLayer2, eqLayer3, eqLayer4, eqLayer5, eqLayer6);
 }
 
 link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
