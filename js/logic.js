@@ -21,6 +21,14 @@ function createMap(eqData0, eqData1, eqData2, eqData3, eqData4, eqData5, eqData6
     id: "mapbox/light-v10",
     accessToken: API_KEY
   });
+  var streetmap = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    tilesize: 512,
+    maxZoom: 16,
+    zoomoffset: -1,
+    id: "mapbox/streets-v11",
+    accessToken: API_KEY
+  });
   var satellitemap = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     tilesize: 512,
@@ -32,6 +40,7 @@ function createMap(eqData0, eqData1, eqData2, eqData3, eqData4, eqData5, eqData6
 
   // Create a baseMaps object to hold the lightmap layer
   var baseMaps = { "Light Map": lightmap,
+                    "Streets Map": streetmap,
                     "Satellite Map": satellitemap  };
 
   // Create an overlayMaps object to hold the earthquakes layer
