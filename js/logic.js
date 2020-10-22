@@ -12,16 +12,21 @@ function getColor(d)  {
 function createMap(eqData0, eqData1, eqData2, eqData3, eqData4, eqData5, eqData6)   {
 
   // Create the tile layer that will be the background of our map
-  var lightmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+                 
+  var lightmap = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    tilesize: 512,
     maxZoom: 16,
-    id: "mapbox.light",
+    zoomoffset: -1,
+    id: "mapbox/light-v10",
     accessToken: API_KEY
   });
-  var satellitemap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+  var satellitemap = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    tilesize: 512,
     maxZoom: 16,
-    id: "mapbox.satellite",
+    zoomoffset: -1,
+    id: "mapbox/satellite-v9",
     accessToken: API_KEY
   });
 
